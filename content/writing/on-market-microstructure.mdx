@@ -1,0 +1,57 @@
+---
+title: "What the Bid-Ask Spread Is Actually Telling You"
+date: "2025-11-10"
+type: writing
+summary: "A short essay on the three components of the bid-ask spread — order processing costs, inventory risk, and adverse selection — and why adverse selection is the interesting one."
+tags: [market-microstructure, markets, finance]
+featured: true
+---
+
+The bid-ask spread is the first thing a new trader notices and the last thing
+most of them truly understand. It looks like a transaction tax. It is not.
+
+## The three-component decomposition
+
+Glosten and Harris (1988) decompose the spread into three parts:
+
+1. **Order processing costs** — the cost of running the matching engine,
+   clearing and settling the trade, paying the humans involved. These are
+   boring and declining toward zero as technology improves.
+
+2. **Inventory risk** — market makers accumulate positions they don't
+   necessarily want. A dealer who has just sold you 10,000 shares of something
+   is now short, and the world might move against her before she can unwind.
+   The spread compensates for this risk.
+
+3. **Adverse selection** — this is the interesting one.
+
+## Why adverse selection is different
+
+The first two components are about cost and risk in a world where both sides
+of the trade have roughly equal information. Adverse selection is what happens
+when they don't.
+
+A market maker who quotes a two-sided market doesn't know whether the person
+hitting her bid is a noise trader liquidating a position to buy a car, or a
+hedge fund that read a 10-K and knows something she doesn't. She can't tell.
+So she widens the spread just enough that the profits from the uninformed flow
+cover the losses from the informed flow.
+
+This is the Glosten-Milgrom (1985) insight, and it has a disturbing implication:
+**the spread is determined by the worst-case counterparty, not the average one.**
+
+## The market design consequence
+
+If you want tighter spreads — more liquid markets — you either need to reduce
+the fraction of informed traders (hard; information is hard to suppress) or
+reduce the harm they cause to market makers (easier; this is what post-trade
+transparency rules attempt to do).
+
+Payment for order flow, IEX's "speed bump," the debate over maker-taker pricing:
+all of these are downstream of this one observation about who is really on the
+other side of the trade.
+
+---
+
+*Reading this prompted by Kyle (1985), which remains one of the most elegant
+models in all of financial economics.*

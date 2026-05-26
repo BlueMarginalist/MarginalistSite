@@ -1,0 +1,68 @@
+---
+title: "Optimal Auction Design Under Asymmetric Information"
+date: "2025-09-01"
+type: research
+summary: "An analysis of revenue-maximizing auction mechanisms when bidders hold privately known valuations drawn from heterogeneous distributions."
+tags: [mechanism-design, auctions, game-theory, information-economics]
+featured: true
+status: working-paper
+links:
+  paper: /papers/auction-mechanisms.pdf
+  github: https://github.com/jackyyang/auction-mechanisms
+---
+
+## Abstract
+
+We study the problem of a seller who wishes to maximize expected revenue when
+allocating a single indivisible good to $n$ bidders. Each bidder $i$ privately
+observes a valuation $v_i \sim F_i$ drawn from a distribution that may differ
+across bidders. Following Myerson (1981), we characterize the optimal mechanism
+via virtual valuations and extend the analysis to settings with correlated types.
+
+## 1. Introduction
+
+The design of revenue-maximizing auctions is a central problem in mechanism
+design. Myerson's (1981) celebrated result shows that under independent private
+values, the optimal direct revelation mechanism takes a clean virtual-value form:
+allocate to the bidder with the highest *virtual valuation*, provided it is
+non-negative.
+
+This paper revisits that framework under two generalizations:
+
+1. **Correlated types** — bidder valuations are drawn from a joint distribution
+   with non-trivial dependence structure.
+2. **Interdependent values** — bidder $i$'s willingness to pay depends not only
+   on her own signal $s_i$ but on the vector $s = (s_1, \ldots, s_n)$.
+
+## 2. Model
+
+Let $\mathcal{N} = \{1, \ldots, n\}$ be the set of bidders. A *direct revelation
+mechanism* is a pair $(q, t)$ where:
+
+- $q : \mathbb{R}^n \to \Delta(\mathcal{N} \cup \{0\})$ maps reported type
+  profiles to allocation probabilities;
+- $t : \mathbb{R}^n \to \mathbb{R}^n$ maps reported profiles to transfer payments.
+
+A mechanism is *incentive compatible* (IC) if truthful reporting is a Bayes-Nash
+equilibrium, and *individually rational* (IR) if each bidder weakly prefers
+participation over opting out.
+
+## 3. Main Result
+
+**Theorem 1.** *Under independent private values with regular distributions
+$F_1, \ldots, F_n$, the revenue-maximizing IC and IR mechanism allocates the
+good to the bidder $i^* = \arg\max_i \psi_i(v_i)$ where*
+
+$$\psi_i(v) = v - \frac{1 - F_i(v)}{f_i(v)}$$
+
+*is the virtual valuation of bidder $i$, provided $\psi_{i^*}(v_{i^*}) \geq 0$.*
+
+The proof follows from the standard envelope argument and the observation that
+IC pins down transfers up to a constant once allocation rules are fixed.
+
+## References
+
+- Myerson, R. B. (1981). Optimal auction design. *Mathematics of Operations
+  Research*, 6(1), 58–73.
+- Bulow, J., & Roberts, J. (1989). The simple economics of optimal auctions.
+  *Journal of Political Economy*, 97(5), 1060–1090.
