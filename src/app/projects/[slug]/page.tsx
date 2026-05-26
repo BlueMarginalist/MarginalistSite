@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { compileMDX } from 'next-mdx-remote/rsc'
 import Link from 'next/link'
 import { getAllSlugs, getRawContent } from '@/lib/content'
-import { mdxComponents } from '@/components/mdx/MDXComponents'
+import { compileMDXContent } from '@/lib/mdx'
 import { IframeEmbed } from '@/components/content/IframeEmbed'
 import { sectionConfig } from '@/lib/config'
 import { formatDate } from '@/lib/utils'
 import type { Frontmatter } from '@/lib/types'
+// Frontmatter import kept for type-only use via compileMDXContent
 
 export async function generateStaticParams() {
   return getAllSlugs('projects').map((slug) => ({ slug }))
@@ -20,10 +20,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   if (!getAllSlugs('projects').includes(slug)) return {}
-  const { frontmatter } = await compileMDX<Frontmatter>({
-    source: getRawContent('projects', slug),
-    options: { parseFrontmatter: true },
-  })
+  const { frontmatter } = await compileMDXContent(getRawContent('projects', slug))
   return {
     title: frontmatter.title,
     description: frontmatter.summary,
@@ -39,11 +36,7 @@ export default async function ProjectDetailPage({
   const { slug } = await params
   if (!getAllSlugs('projects').includes(slug)) notFound()
 
-  const { content, frontmatter } = await compileMDX<Frontmatter>({
-    source: getRawContent('projects', slug),
-    options: { parseFrontmatter: true },
-    components: mdxComponents,
-  })
+  const { content, frontmatter } = await compileMDXContent(getRawContent('projects', slug))
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">

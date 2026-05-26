@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { compileMDX } from 'next-mdx-remote/rsc'
 import Link from 'next/link'
 import { getAllSlugs, getRawContent } from '@/lib/content'
-import { mdxComponents } from '@/components/mdx/MDXComponents'
+import { compileMDXContent } from '@/lib/mdx'
 import { sectionConfig } from '@/lib/config'
 import { formatDate } from '@/lib/utils'
 import type { Frontmatter } from '@/lib/types'
@@ -19,10 +18,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   if (!getAllSlugs('research').includes(slug)) return {}
-  const { frontmatter } = await compileMDX<Frontmatter>({
-    source: getRawContent('research', slug),
-    options: { parseFrontmatter: true },
-  })
+  const { frontmatter } = await compileMDXContent(getRawContent('research', slug))
   return {
     title: frontmatter.title,
     description: frontmatter.summary,
@@ -38,11 +34,7 @@ export default async function ResearchDetailPage({
   const { slug } = await params
   if (!getAllSlugs('research').includes(slug)) notFound()
 
-  const { content, frontmatter } = await compileMDX<Frontmatter>({
-    source: getRawContent('research', slug),
-    options: { parseFrontmatter: true },
-    components: mdxComponents,
-  })
+  const { content, frontmatter } = await compileMDXContent(getRawContent('research', slug))
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
