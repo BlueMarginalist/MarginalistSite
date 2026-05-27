@@ -2,16 +2,16 @@
 title: "Macro Data Dashboard"
 date: "2025-07-01"
 type: projects
-summary: "A lightweight dashboard that aggregates key U.S. macroeconomic indicators from FRED, BLS, and BEA into a single live-updating view."
+summary: "A lightweight dashboard that aggregates key U.S. macroeconomic indicators from FRED into a single live-updating view."
 tags: [macroeconomics, data, python, dashboard]
-featured: false
+featured: true
 links:
-  demo: https://tools.jackyyang.com/macro
+  demo: https://bluemarginalist.github.io/MacroDashBoard/
   github: https://github.com/jackyyang/macro-dashboard
 ---
 
 A personal tool I built to avoid jumping between five different government
-data portals when I want a quick macro read.
+data portals when I want a quick US macro read.
 
 ## What it tracks
 
@@ -34,14 +34,5 @@ data portals when I want a quick macro read.
 - Credit spreads: IG (CDX) and HY (CDX)
 
 ## Implementation
+Build with pyfred, manage the data in the "raw data" folder, pull new data from FRED daily through Github Action and update the excel read
 
-The backend is a small Python FastAPI service that fetches from FRED, BLS,
-and BEA on a daily schedule and writes to a SQLite cache. The frontend is
-a React app that polls the API on page load.
-
-Hosted on a free-tier Render instance — response time is slow on cold start
-but fine for personal use.
-
-## Why not just use Bloomberg / Refinitiv?
-
-I don't have a terminal. This is the next best thing.

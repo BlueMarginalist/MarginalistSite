@@ -5,12 +5,12 @@ export const siteConfig = {
   handle: 'Marginalist',
   tagline: 'Mathematics & Economics',
   description:
-    'Undergraduate researcher in mathematics and economics, building tools at the intersection of theory and markets.',
+    'Rising sophomore in mathematics and economics at Duke University, interested in macro, market, and investments',
   url: 'https://jackyyang.com',
   social: {
-    github: 'https://github.com/jackyyang',
-    linkedin: 'https://linkedin.com/in/jackyyang',
-    email: 'mmgjackyyang@gmail.com',
+    github: 'https://github.com/BlueMarginalist',
+    linkedin: 'https://www.linkedin.com/in/jacky-yang-duke',
+    email: 'jacky.yang@duke.edu',
   },
 } as const
 
@@ -21,8 +21,8 @@ export const sectionConfig: Record<
   { label: string; description: string; path: string }
 > = {
   research: {
-    label: 'Research',
-    description: 'Working papers, published work, and research notes.',
+    label: 'Academics',
+    description: 'Working papers, published work, and class projects.',
     path: '/research',
   },
   projects: {
@@ -31,7 +31,7 @@ export const sectionConfig: Record<
     path: '/projects',
   },
   writing: {
-    label: 'Marginalist',
+    label: 'Writing',
     description: 'Notes, essays, and reading responses on economics, markets, and ideas.',
     path: '/writing',
   },
