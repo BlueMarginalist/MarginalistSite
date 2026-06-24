@@ -15,8 +15,7 @@ export default function AboutPage() {
 
       <div className="prose prose-zinc dark:prose-invert max-w-none">
         <p>
-          I&apos;m Jacky Yang, a rising sophomore at Duke University (Woodman Scholar)
-          studying mathematics and economics. My interests sit at the intersection of
+          I&apos;m a student at Duke University studying mathematics and economics. My interests sit at the intersection of
           macro, markets, and investments: my passion is to understand the grand paradigm
           moving economies, and how that will affect market pricing.
         </p>
