@@ -36,40 +36,40 @@ export default async function WritingDetailPage({
   const { content, frontmatter } = await compileMDXContent(getRawContent('writing', slug))
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+    <div className="max-w-2xl mx-auto px-5 sm:px-8 pt-14 sm:pt-20">
       <Link
         href={sectionConfig.writing.path}
-        className="inline-block mb-8 text-sm text-zinc-500 dark:text-zinc-400 hover:text-blue-700 dark:hover:text-blue-400 transition-colors"
+        className="inline-block mb-10 font-mono text-xs text-mute hover:text-ink transition-colors"
       >
         ← {sectionConfig.writing.label}
       </Link>
 
       <header className="mb-12">
-        <time className="text-sm text-zinc-400 dark:text-zinc-500 block mb-4">
+        <time className="font-mono text-xs text-mute block mb-4">
           {formatDate(frontmatter.date)}
         </time>
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 leading-snug mb-4">
+        <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-[-0.025em] text-ink leading-[1.1] text-balance mb-6">
           {frontmatter.title}
         </h1>
-        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+        <p className="text-base sm:text-lg text-mute leading-relaxed text-pretty">
           {frontmatter.summary}
         </p>
 
         {frontmatter.tags && frontmatter.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-4">
+          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-5">
             {frontmatter.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-500 px-2 py-1 rounded"
+                className="font-mono text-xs text-mute"
               >
-                {tag}
+                #{tag}
               </span>
             ))}
           </div>
         )}
       </header>
 
-      <article className="prose prose-zinc dark:prose-invert max-w-none">
+      <article className="prose max-w-none">
         {content}
       </article>
     </div>

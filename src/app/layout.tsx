@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Bricolage_Grotesque, Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
@@ -7,7 +7,9 @@ import { siteConfig } from '@/lib/config'
 import '@/styles/globals.css'
 import 'katex/dist/katex.min.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const display = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-display' })
+const body = Geist({ subsets: ['latin'], variable: '--font-body' })
+const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono' })
 
 export const metadata: Metadata = {
   title: {
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: ['/og-default.png'],
   },
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: '/favicon.svg?v=2' },
 }
 
 export default function RootLayout({
@@ -42,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} font-sans bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col antialiased`}
+        className={`${display.variable} ${body.variable} ${mono.variable} font-sans bg-bg text-ink min-h-screen flex flex-col antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -50,8 +52,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-volt focus:text-onvolt focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
+          >
+            Skip to content
+          </a>
           <Nav />
-          <main className="flex-1">{children}</main>
+          <main id="main" className="flex-1">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

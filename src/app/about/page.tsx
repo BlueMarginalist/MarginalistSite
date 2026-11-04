@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { siteConfig } from '@/lib/config'
 
 export const metadata: Metadata = {
@@ -8,12 +9,25 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-      <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-10">
-        About
-      </h1>
+    <div className="max-w-2xl mx-auto px-5 sm:px-8 pt-14 sm:pt-24">
+      <div className="flex items-end justify-between gap-6 mb-14">
+        <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-[-0.03em] leading-[1.05] text-ink">
+          About
+        </h1>
+        <div className="relative w-28 sm:w-36 shrink-0">
+          <Image
+            src="/profile.jpg"
+            alt={siteConfig.name}
+            width={240}
+            height={300}
+            className="w-full aspect-[4/5] object-cover grayscale contrast-105"
+            priority
+          />
+          <div aria-hidden className="absolute inset-x-0 bottom-0 h-1.5 bg-volt" />
+        </div>
+      </div>
 
-      <div className="prose prose-zinc dark:prose-invert max-w-none">
+      <div className="prose max-w-none">
         <p>
           I&apos;m a student at Duke University studying mathematics and economics. My interests sit at the intersection of
           macro, markets, and investments: my passion is to understand the grand paradigm
@@ -34,31 +48,59 @@ export default function AboutPage() {
           macro coursework.
         </p>
 
-        <h2>Experience</h2>
-        <p>
-          I&apos;m currently an Investment Banking &amp; Financial Technology Intern at{' '}
-          <strong>Gilbert &amp; Pardue Transaction Advisors</strong> in Houston. I&apos;ve
-          been supporting sell-side M&amp;A processes — CIM creation, deal structuring —
-          and built an automated outreach program using LLM APIs that eliminated over 20
-          hours of manual work per week and saved the firm $15K annually in third-party
-          subscriptions.
-        </p>
-        <p>
-          Before that, I interned at <strong>Caprae Capital Partners</strong> (Private
-          Equity, Glendale) and <strong>New Frontier Enterprise</strong> (Private Equity,
-          Los Altos). At Caprae, I served five sponsor clients on Search-as-a-Service
-          acquisition mandates, sourced 500+ leads, and compiled market reports in
-          private credit and insurance that identified $50M+ in business development
-          opportunities. At New Frontier, I screened 100+ acquisition targets across five
-          deal platforms, built an LBO model for a hospice service provider, and ran
-          commercial due diligence workstreams through to 5-year cash flow projections.
-        </p>
-
         <h2>Beyond Work</h2>
-        <p>
-          Fencing is my favorite sport. Started fencing in middle school, I co-founded the Duke Fencing Club and coach épée. I love most sports, including soccer
-          (became a Man City fan in 2025), badminton, hiking .etc. Outside of all that, I love cooking Szechuan food and meditation.
-        </p>
+        <dl className="not-prose mt-8 border-t border-ink">
+          <div className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-8 py-6 border-b border-line">
+            <dt className="font-mono text-xs text-mute pt-1.5">Fencing</dt>
+            <dd>
+              <p className="font-display text-xl font-semibold tracking-tight text-ink text-balance">
+                My favorite sport.
+              </p>
+              <p className="mt-2 text-base leading-relaxed text-mute">
+                Started in middle school. I co-founded the Duke Fencing Club and coach épée.
+              </p>
+              <div className="mt-5 flex items-start gap-3">
+                <Image
+                  src="/about/fencing.jpg"
+                  alt="Fencing teammates and a coach posing with the Duke Blue Devil mascot in front of blue lockers and fencing trophies"
+                  width={1500}
+                  height={2000}
+                  sizes="170px"
+                  className="h-44 sm:h-56 w-auto"
+                />
+                <div className="h-44 sm:h-56 bg-white border border-line">
+                  <Image
+                    src="/about/duke-club-fencing.png"
+                    alt="Club Fencing at Duke logo"
+                    width={691}
+                    height={681}
+                    className="h-full w-auto"
+                  />
+                </div>
+              </div>
+            </dd>
+          </div>
+          <div className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-8 py-6 border-b border-line">
+            <dt className="font-mono text-xs text-mute pt-0.5">Other sports</dt>
+            <dd className="text-base leading-relaxed text-ink">
+              <p>I love most sports: soccer (a Man City fan since 2025), badminton, hiking, and more.</p>
+              <Image
+                src="/about/soccer.jpg"
+                alt="Players and staff gathered on the pitch at a stadium, with a pink Gracias Jordi banner behind them"
+                width={1500}
+                height={1125}
+                sizes="(min-width: 640px) 360px, 100vw"
+                className="mt-5 w-full max-w-sm h-auto"
+              />
+            </dd>
+          </div>
+          <div className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-8 py-6 border-b border-line">
+            <dt className="font-mono text-xs text-mute pt-0.5">Off the piste</dt>
+            <dd className="text-base leading-relaxed text-ink">
+              Cooking, and exploring local restaurants in Durham!
+            </dd>
+          </div>
+        </dl>
 
         <h2>CV</h2>
         <p>

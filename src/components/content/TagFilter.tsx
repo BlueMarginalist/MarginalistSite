@@ -9,6 +9,11 @@ interface TagFilterProps {
   activeTag?: string
 }
 
+const chip =
+  'px-3 py-1.5 font-mono text-xs border transition-colors'
+const on = 'bg-volt text-onvolt border-volt font-semibold'
+const off = 'border-line text-mute hover:text-ink hover:border-ink'
+
 export function TagFilter({ tags, activeTag }: TagFilterProps) {
   const pathname = usePathname()
 
@@ -16,27 +21,14 @@ export function TagFilter({ tags, activeTag }: TagFilterProps) {
 
   return (
     <div className="flex flex-wrap gap-2" role="navigation" aria-label="Filter by tag">
-      <Link
-        href={pathname}
-        className={cn(
-          'px-3 py-1 rounded-full text-xs font-medium transition-colors',
-          !activeTag
-            ? 'bg-blue-700 text-white'
-            : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-        )}
-      >
+      <Link href={pathname} className={cn(chip, !activeTag ? on : off)}>
         All
       </Link>
       {tags.map((tag) => (
         <Link
           key={tag}
           href={`${pathname}?tag=${encodeURIComponent(tag)}`}
-          className={cn(
-            'px-3 py-1 rounded-full text-xs font-medium transition-colors',
-            activeTag === tag
-              ? 'bg-blue-700 text-white'
-              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-          )}
+          className={cn(chip, activeTag === tag ? on : off)}
         >
           {tag}
         </Link>

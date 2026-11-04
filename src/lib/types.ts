@@ -1,4 +1,4 @@
-export type ContentType = 'research' | 'projects' | 'writing'
+export type ContentType = 'projects' | 'writing'
 
 export interface ContentLinks {
   paper?: string

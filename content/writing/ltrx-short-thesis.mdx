@@ -1,0 +1,49 @@
+---
+title: "Why I Think LTRX Is a Short at $7.2"
+date: "2026-11-03"
+type: writing
+summary: "LTRX has run 40%+ on a drone and defense narrative, but SoMs are commoditized, NDAA/TAA compliance is not a moat, and OEM customers hold the pricing power. My base case is a $5.5 target, 24% downside."
+tags: [equity]
+featured: false
+---
+
+Current Price: \$7.22 | Target Price: \$5.5 | Downside: 24%
+
+## Recent Setup
+
+I think the board and management have shifted their sole focus to unmanned systems growth: since Sep 14, LTRX has risen over 40%, driven by the Sep 11 investor presentation, the Sep 12 CEO insider purchase, and the Sep 22 new director nominee, Jason Lamb.
+
+During the investor presentation, management focused on the "\$70B DoW budget for UAS applications," restated the design win with Teal's Black Widow, and disclosed two drone-adjacent clients: Swarmer and Safe Pro Group, an autonomy software provider and a ground hazard detection provider, respectively.
+
+For the board change, the whole narrative around Jason Lamb is his previous role at BlackSea, a manufacturer of small unmanned surface and subsea vessels that was eventually sold to the US Navy. Jason doesn't have a strong operational track record: he was the Chief Strategy Officer at BlackSea and the CEO of The LGL Group, a tiny company with only \$2.45M in net sales. While he was nominated, two board members declined to stand for re-election, including James Auker, who was put on the board by activists and pushed an agenda to sell the company last June. The investor optimism rests entirely on the hope that Jason will bring defense client connections that turn the DoW budget into revenue and expand LTRX to defense contractors beyond Red Cat.
+
+Meanwhile, management doesn't seem interested in copying Digi's success by adding more software layers to the IoT business, particularly the out-of-band (OOB) segment where they claimed growth. Recently raised cash is being used to pay down debt and fund the Nero acquisition, which is expected to close after year-end. Nero adds only ~4% to revenue and also differs substantially from Digi's Lighthouse in functionality. As pure asset-tracking software, it adds no value to the OOB or IoT solutions, and at most can be an upsell on the embedded modules and IoT solutions.
+
+## It’s not changed that LTRX has no moat and faces competition
+
+I think the topline growth investors are now pricing in is low-quality and high-uncertainty. SoM is a very hard business to build a moat in. (1) Lantronix outsources manufacturing to Taiwan, China, and Thailand, meaning it is asset-light but has no operating leverage. Some companies do earn great margins: for example, Advantech has ~15% net margin in its embedded module business, but it is a manufacturer with 10x more sales. (2) The module business is essentially commoditized globally. Management conflates edge computing and camera AI with the SoMs they provide, yet the more customized and differentiated software belongs to the customers that run their programs on top of LTRX's modules, e.g., Palantir, Nero Pro, etc. LTRX does not own that software. The flagship product LTRX cites, the "drone reference design," is essentially a collection of purchased hardware plus one-off engineering services. They claim camera expertise, yet it's hard to imagine large defense contractors using their visual solution. Currently, its margin is below "the 40% in other parts," and with further expansion of drone-native compute providers such as ModalAI, the margin could go lower.
+
+## Defense revenue may not be as desirable
+
+The market believes Jason will bring in defense revenue, but that opportunity is less exciting than it sounds:
+
+(1) The only arguable moat for LTRX is NDAA/TAA compliance. NDAA refers to Section 848 of the FY20 NDAA, which bars the Pentagon from buying or flying drones whose parts or software come from China, Russia, Iran, or North Korea. TAA requires products to be made or "substantially transformed" in the US or designated countries, including Taiwan, Japan, Korea, the EU, the UK, Canada, Mexico, Israel, and Ukraine. The NDAA bans China but not Taiwan or Southeast Asian countries like Thailand and Vietnam, and TAA essentially directs final manufacturing/assembly to places like Taiwan or Mexico. In practice, this only affects companies that have outsourced heavily to China and can't shift their supply chain quickly. However, most emerging SoM producers, particularly drone-native ones, are not heavily exposed to China. Established companies like NVIDIA, which also has a SoM line (NVIDIA Jetson), have supply chains in authorized countries as well, meaning they can make a portion of their products NDAA/TAA compliant if they want.
+
+These certifications are self-declared: as long as the provider can give full supply-chain proof, there is no lead time for federal approval. Other US players such as ModalAI, Auterion, and ARK Electronics have all declared compliance. Below is a table of SoM and adjacent providers that have declared or can declare NDAA/TAA compliance. The closest thing to a formal certification is the Blue UAS list, an initiative by the US Defense Innovation Unit that vets and approves a set of safe options. Management of the program moved to the Defense Contract Management Agency in 2026, so the list directly tracks every vendor eligible for defense contracts. There are two lists: one for drones and one for frameworks/components. I screenshotted the lists from the website, rebuilt them in Excel, and did some analysis. The key findings are: (1) Lantronix is not on the list yet, for unknown reasons. (2) Compute is a relatively niche category compared to other drone parts; e.g., radio/datalink has 101 items, camera 35, and compute 9. But the competitors on the list are integrated. ModalAI has 20 listed items (No. 1 manufacturer across all categories), including a SoM also built on Qualcomm, and spans camera/sensor, ground control, and radio/datalink. NextVision has 7 items across compute and camera. Raspberry Pi also has both camera and compute, and NVIDIA is already an integrated solution provider. Management's case that they have camera expertise is very weak. With the total number of items growing at an accelerating pace, I expect the compute category to attract more competitors, possibly companies that already have other items listed, like ModalAI.
+
+![Blue UAS list: total listed items by quarter](/LTRX%20Graphs/Blue%20UAS%20Total.png)
+
+![Blue UAS list: compute items by quarter](/LTRX%20Graphs/Blue%20UAS%20Compute.png)
+
+(2) Larger defense contractors have too much pricing power. Lantronix's defense deals differ from BlackSea's in that Lantronix doesn't own the defense deals; it collaborates with the drone companies that do. That's not to say Jason's defense expertise and network aren't useful, but the pricing ceiling for Lantronix is very limited given that drone OEMs are all running at a loss today. The largest drone OEM customers for the SoMs are likely Red Cat and DoD in Ukraine. Red Cat runs at a 16% gross margin and a -488% EBITDA margin. Per Christian, Red Cat's CFO, on the Q2 earnings call: "If the Army wanted to adjust…we just take those costs…Now we're at the part of where we are maturing, doing cost downs in the product." The CEO targets a 30% gross margin, which management attributed to "economies of scale" rather than pricing gains from the Army. Drone contracting is an increasingly competitive field, and the Army has pricing power too. So "economies of scale" for the OEM simply translate into lower margins for Lantronix's SoM.
+
+It's true that switching SoMs requires a design change, but that isn't insurmountable given how fast drones iterate and how often the Army requires companies like Red Cat to "tweak engineering." In fact, Red Cat switched from NVIDIA Jetson TX1 for the Teal One in 2018 to Qualcomm Snapdragon for the Golden Eagle in 2020 and Teal 2 in 2023, then to Lantronix for the 2024 Black Widow program. My guess is that moving from an NVIDIA-based to a Qualcomm-based architecture took two years, but the shift from Teal 2 to Black Widow didn't take as long because both use the same chip. If so, Lantronix could lose the deal to other Qualcomm-based suppliers in a similar way.
+
+## Valuation
+
+Lantronix trades at 28.86x NTM EBITDA, 27.8x FY27 EBITDA, and 25.27x FY28 EBITDA, well above IoT peers like Digi (17.9x). With a current market cap of \$338M and \$60M of net cash, EV is \$278M against FY26 EBITDA of \$8M. Analyst consensus assumes 15% topline growth and roughly 50bp of EBITDA margin expansion in FY27, and a margin 40bp above current in FY28. Current pricing implies a more aggressive growth projection, likely 20%+. I believe both growth and margin can underperform, with margin likely flat to down. My base case is EBITDA margin down 30bp by FY28 to around 6.3%, which results in \$9.9M EBITDA, and a multiple re-rating to around 20x. That gives a \$198M EV. Adding back \$60M of net cash results in a \$258M market cap, or \$5.5 per share on ~46.8M shares, 24% downside. If growth underdelivers, the multiple can fall further. Price may go higher in the next few days due to technical factors, which may provide better short opportunity.
+
+## Catalysts
+- Any competitor deal win or SoM manufacturing announcement
+- A miss on the FY27 drone revenue doubling goal, or margin slippage in FY27
+- Client cost cutting initiatives

@@ -20,11 +20,6 @@ export const sectionConfig: Record<
   ContentType,
   { label: string; description: string; path: string }
 > = {
-  research: {
-    label: 'Academics',
-    description: 'Working papers, published work, and class projects.',
-    path: '/research',
-  },
   projects: {
     label: 'Projects',
     description: 'Tools, apps, and code experiments.',

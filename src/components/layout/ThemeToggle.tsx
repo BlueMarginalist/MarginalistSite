@@ -10,13 +10,15 @@ export function ThemeToggle() {
   useEffect(() => setMounted(true), [])
 
   // Render a placeholder of the same size to prevent layout shift
-  if (!mounted) return <div className="w-8 h-8" />
+  if (!mounted) return <div className="size-11" />
+
+  const isDark = theme === 'dark'
 
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2 rounded-md text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-      aria-label="Toggle theme"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className="size-11 inline-flex items-center justify-center text-mute hover:text-ink transition-colors"
+      aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
     >
       {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
     </button>

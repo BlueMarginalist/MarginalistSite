@@ -13,11 +13,11 @@ export function IframeEmbed({ src, title, height = 600 }: IframeEmbedProps) {
 
   return (
     <div
-      className="relative rounded-lg border border-zinc-200 dark:border-zinc-700 overflow-hidden bg-zinc-50 dark:bg-zinc-900"
+      className="relative border border-line overflow-hidden bg-surface"
       style={{ height }}
     >
       {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center text-sm text-zinc-400 dark:text-zinc-500">
+        <div className="absolute inset-0 flex items-center justify-center text-sm text-mute">
           Loading demo…
         </div>
       )}

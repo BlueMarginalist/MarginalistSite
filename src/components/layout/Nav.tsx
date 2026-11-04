@@ -18,36 +18,41 @@ const navLinks = [
 export function Nav() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-sm">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+    <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16">
         <Link
           href="/"
-          className="font-semibold text-zinc-900 dark:text-zinc-100 hover:text-blue-700 dark:hover:text-blue-400 transition-colors"
+          className="group flex items-center gap-2.5 font-display font-bold text-lg tracking-tight text-ink"
         >
+          <span
+            aria-hidden
+            className="block size-3 bg-volt transition-transform duration-300 ease-out group-hover:rotate-90"
+          />
           {siteConfig.name}
         </Link>
 
         {/* Desktop */}
-        <nav className="hidden sm:flex items-center gap-1">
+        <nav className="hidden sm:flex items-center gap-7">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
+              aria-current={isActive(link.href) ? 'page' : undefined}
               className={cn(
-                'px-3 py-1.5 rounded-md text-sm transition-colors',
-                pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
-                  ? 'text-blue-700 dark:text-blue-400 font-medium bg-blue-50 dark:bg-blue-950/40'
-                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                'relative py-1 text-sm font-medium transition-colors',
+                'after:absolute after:inset-x-0 after:-bottom-0.5 after:h-[3px] after:bg-volt after:origin-left after:transition-transform after:duration-300 after:ease-out',
+                isActive(link.href)
+                  ? 'text-ink after:scale-x-100'
+                  : 'text-mute hover:text-ink after:scale-x-0 hover:after:scale-x-100'
               )}
             >
               {link.label}
             </Link>
           ))}
-          <div className="ml-1">
-            <ThemeToggle />
-          </div>
+          <ThemeToggle />
         </nav>
 
         {/* Mobile */}
@@ -55,8 +60,9 @@ export function Nav() {
           <ThemeToggle />
           <button
             onClick={() => setOpen(!open)}
-            className="p-2 rounded-md text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
-            aria-label="Toggle menu"
+            className="size-11 inline-flex items-center justify-center text-mute hover:text-ink transition-colors"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
           >
             {open ? (
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -73,17 +79,16 @@ export function Nav() {
 
       {/* Mobile dropdown */}
       {open && (
-        <nav className="sm:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 pb-3 pt-2 flex flex-col gap-1">
+        <nav className="sm:hidden border-t border-line bg-bg px-5 pb-4 pt-2 flex flex-col">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
+              aria-current={isActive(link.href) ? 'page' : undefined}
               className={cn(
-                'px-3 py-2 rounded-md text-sm transition-colors',
-                pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
-                  ? 'text-blue-700 dark:text-blue-400 font-medium bg-blue-50 dark:bg-blue-950/40'
-                  : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
+                'py-3 font-display text-xl font-semibold tracking-tight border-b border-line last:border-0 transition-colors',
+                isActive(link.href) ? 'text-ink' : 'text-mute hover:text-ink'
               )}
             >
               {link.label}

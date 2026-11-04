@@ -1,84 +1,66 @@
 import Link from 'next/link'
 import type { ContentItem } from '@/lib/types'
 import { sectionConfig } from '@/lib/config'
-import { formatDateShort, cn } from '@/lib/utils'
+import { formatDateShort } from '@/lib/utils'
 
 interface ContentCardProps {
   item: ContentItem
   showType?: boolean
 }
 
-const typeBadge: Record<string, string> = {
-  research:
-    'bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-400',
-  projects:
-    'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400',
-  writing:
-    'bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-400',
-}
-
 export function ContentCard({ item, showType = false }: ContentCardProps) {
   const href = `/${item.contentType}/${item.slug}`
 
   return (
-    <article className="group border border-zinc-200 dark:border-zinc-800 rounded-lg p-5 hover:border-blue-300 dark:hover:border-blue-700 transition-colors bg-white dark:bg-zinc-900/40">
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="flex items-center gap-2 flex-wrap">
-          {showType && (
-            <span
-              className={cn(
-                'text-xs font-medium px-2 py-0.5 rounded-full',
-                typeBadge[item.contentType]
-              )}
-            >
-              {sectionConfig[item.contentType].label}
-            </span>
-          )}
+    <article className="group relative grid gap-x-8 gap-y-2 py-8 px-3 -mx-3 border-t border-line sm:grid-cols-[7.5rem_1fr_auto] transition-colors duration-200 hover:bg-surface">
+      <div className="font-mono text-xs text-mute tabular pt-1.5 flex sm:flex-col gap-x-3 gap-y-1.5">
+        <time>{formatDateShort(item.date)}</time>
+        {showType && (
+          <span className="text-ink">{sectionConfig[item.contentType].label}</span>
+        )}
+      </div>
+
+      <div className="min-w-0">
+        <h3 className="font-display text-lg sm:text-xl font-semibold tracking-tight leading-snug text-ink text-balance">
+          <Link href={href} className="after:absolute after:inset-0">
+            {item.title}
+          </Link>
           {item.status && (
-            <span className="text-xs text-zinc-400 dark:text-zinc-500 border border-zinc-200 dark:border-zinc-700 px-2 py-0.5 rounded-full">
+            <span className="ml-3 align-middle inline-block bg-volt text-onvolt font-sans text-xs font-semibold px-2 py-0.5">
               {item.status}
             </span>
           )}
-        </div>
-        <time className="text-xs text-zinc-400 dark:text-zinc-500 shrink-0 pt-0.5">
-          {formatDateShort(item.date)}
-        </time>
+        </h3>
+
+        <p className="mt-2 max-w-[65ch] text-sm sm:text-[0.9375rem] text-mute leading-relaxed">
+          {item.summary}
+        </p>
+
+        {item.tags && item.tags.length > 0 && (
+          <p className="mt-3 font-mono text-xs text-mute flex flex-wrap gap-x-3 gap-y-1">
+            {item.tags.map((tag) => (
+              <span key={tag}>#{tag}</span>
+            ))}
+          </p>
+        )}
+
+        {item.links && (
+          <div className="relative z-10 mt-4 flex flex-wrap gap-x-5 gap-y-1 w-fit">
+            {item.links.paper && <ExtLink href={item.links.paper} label="Paper" />}
+            {item.links.arxiv && <ExtLink href={item.links.arxiv} label="arXiv" />}
+            {item.links.github && <ExtLink href={item.links.github} label="GitHub" />}
+            {item.links.demo && <ExtLink href={item.links.demo} label="Live demo" accent />}
+            {item.links.external && <ExtLink href={item.links.external} label="View" accent />}
+          </div>
+        )}
       </div>
 
-      <Link href={href}>
-        <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 leading-snug mb-2 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
-          {item.title}
-        </h3>
-      </Link>
-
-      <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-3">
-        {item.summary}
-      </p>
-
-      {item.tags && item.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          {item.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-xs text-zinc-500 dark:text-zinc-500 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {item.links && (
-        <div className="flex flex-wrap gap-4 pt-1 border-t border-zinc-100 dark:border-zinc-800 mt-3">
-          {item.links.paper && <ExtLink href={item.links.paper} label="Paper" />}
-          {item.links.arxiv && <ExtLink href={item.links.arxiv} label="arXiv" />}
-          {item.links.github && <ExtLink href={item.links.github} label="GitHub" />}
-          {item.links.demo && <ExtLink href={item.links.demo} label="Live demo →" accent />}
-          {item.links.external && (
-            <ExtLink href={item.links.external} label="View →" accent />
-          )}
-        </div>
-      )}
+      <span
+        aria-hidden
+        className="hidden sm:block self-start font-display text-xl text-mute transition-all duration-300 ease-out group-hover:text-ink group-hover:translate-x-1"
+      >
+        →
+      </span>
     </article>
   )
 }
@@ -97,12 +79,11 @@ function ExtLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(
-        'text-xs font-medium transition-colors',
+      className={
         accent
-          ? 'text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300'
-          : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
-      )}
+          ? 'py-2 text-sm font-semibold text-ink underline decoration-volt decoration-[3px] underline-offset-4 hover:bg-volt hover:text-onvolt transition-colors'
+          : 'text-sm font-medium text-mute underline decoration-line decoration-2 underline-offset-4 hover:text-ink hover:decoration-volt transition-colors'
+      }
     >
       {label}
     </a>

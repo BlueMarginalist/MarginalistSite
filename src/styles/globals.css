@@ -3,7 +3,91 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg: 246 247 249;
+    --surface: 255 255 255;
+    --ink: 11 15 26;
+    --mute: 82 90 107;
+    --line: 216 220 228;
+    --link: 36 56 255;
+    --volt: 198 244 50;
+    --on-volt: 11 15 26;
+    --orbit: 120 128 144;
+    color-scheme: light;
+  }
+
+  .dark {
+    --bg: 10 13 20;
+    --surface: 19 24 35;
+    --ink: 236 239 245;
+    --mute: 156 164 180;
+    --line: 41 48 63;
+    --link: 140 158 255;
+    --orbit: 255 255 255;
+    color-scheme: dark;
+  }
+
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  body {
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  ::selection {
+    background: rgb(var(--volt));
+    color: rgb(var(--on-volt));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--link));
+    outline-offset: 3px;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  * {
+    scrollbar-color: rgb(var(--line)) transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Staggered entrance for the hero only; content is visible without animation support. */
+  .rise {
+    animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise {
+      animation: none;
+    }
   }
 }

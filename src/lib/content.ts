@@ -35,7 +35,7 @@ export function getRawContent(type: ContentType, slug: string): string {
 }
 
 export function getFeaturedContent(): ContentItem[] {
-  const types: ContentType[] = ['research', 'projects', 'writing']
+  const types: ContentType[] = ['projects', 'writing']
   return types
     .flatMap((type) => getAllContent(type))
     .filter((item) => item.featured)
